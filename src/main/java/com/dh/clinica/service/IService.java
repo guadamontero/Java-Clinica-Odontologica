@@ -8,9 +8,9 @@ import java.util.Optional;
 @Service
 public interface IService<T> {
     T guardar(T t);
-    Optional<T> buscar (Integer id);
+    Optional<T> buscar (Long id);
     List<T> buscarTodos();
-    boolean eliminar(Integer id);
+    boolean eliminar(Long id);
     public T actualizar(T t);
 
 }

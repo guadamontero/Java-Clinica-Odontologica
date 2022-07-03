@@ -26,7 +26,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Paciente> mostrarPacientePorId(@PathVariable Integer id){
+    public Optional<Paciente> mostrarPacientePorId(@PathVariable Long id){
         return pacienteService.buscar(id);
     }
 
@@ -36,7 +36,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarPacientePorId(@PathVariable Integer id){
+    public void eliminarPacientePorId(@PathVariable Long id){
         pacienteService.eliminar(id);
     }
 }

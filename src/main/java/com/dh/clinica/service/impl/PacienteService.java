@@ -26,7 +26,7 @@ public class PacienteService implements IService<Paciente> {
     }
 
     @Override
-    public Optional<Paciente> buscar(Integer id) {
+    public Optional<Paciente> buscar(Long id) {
         return repository.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class PacienteService implements IService<Paciente> {
     }
 
     @Override
-    public boolean eliminar(Integer id) {
+    public boolean eliminar(Long id) {
         Boolean respuesta;
         if(repository.findById(id).isPresent()){
             repository.deleteById(id);

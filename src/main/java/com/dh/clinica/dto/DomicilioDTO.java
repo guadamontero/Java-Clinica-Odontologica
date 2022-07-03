@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class DomicilioDTO {
-    private Integer id;
+    private Long id;
     private String calle;
     private String numero;
     private String localidad;

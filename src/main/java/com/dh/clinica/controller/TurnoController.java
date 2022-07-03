@@ -23,7 +23,7 @@ public class TurnoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Turno> mostrarTurnoPorId(@PathVariable Integer id){
+    public Optional<Turno> mostrarTurnoPorId(@PathVariable Long id){
         return turnoService.mostrarPorId(id);
     }
 

@@ -14,7 +14,7 @@ public class Turno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private Long id;
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

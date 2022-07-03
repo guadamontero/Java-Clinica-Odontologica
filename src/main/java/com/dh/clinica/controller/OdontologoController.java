@@ -23,7 +23,7 @@ public class OdontologoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Odontologo> mostrarOdontologoPorId(@PathVariable Integer id){
+    public Optional<Odontologo> mostrarOdontologoPorId(@PathVariable Long id){
         return odontologoService.buscar(id);
     }
 
@@ -33,7 +33,7 @@ public class OdontologoController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarOdontologoPorId(@PathVariable Integer id){
+    public void eliminarOdontologoPorId(@PathVariable Long id){
         odontologoService.eliminar(id);
     }
 }

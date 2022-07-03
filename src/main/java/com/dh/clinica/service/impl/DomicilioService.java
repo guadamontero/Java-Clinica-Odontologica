@@ -23,7 +23,7 @@ public class DomicilioService implements IService<Domicilio> {
     }
 
     @Override
-    public Optional<Domicilio> buscar(Integer id) {
+    public Optional<Domicilio> buscar(Long id) {
         return Optional.empty();
     }
     @Override
@@ -31,7 +31,7 @@ public class DomicilioService implements IService<Domicilio> {
         return null;
     }
     @Override
-    public boolean eliminar(Integer id) {
+    public boolean eliminar(Long id) {
         return true;
     }
 

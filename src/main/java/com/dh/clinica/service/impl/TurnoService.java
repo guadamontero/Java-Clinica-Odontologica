@@ -18,7 +18,7 @@ public class TurnoService {
         return new ArrayList<>(repository.findAll());
     }
 
-    public Optional<Turno> mostrarPorId(Integer id){
+    public Optional<Turno> mostrarPorId(Long id){
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class TurnoService {
         return repository.save(turno);
     }
 
-    public void eliminarPorId(Integer id){
+    public void eliminarPorId(Long id){
         repository.deleteById(id);
     }
 }
