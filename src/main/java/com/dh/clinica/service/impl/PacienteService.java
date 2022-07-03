@@ -2,7 +2,7 @@ package com.dh.clinica.service.impl;
 
 import com.dh.clinica.entities.Domicilio;
 import com.dh.clinica.entities.Paciente;
-import com.dh.clinica.repository.PacienteRepository;
+import com.dh.clinica.repository.IPacienteRepository;
 import com.dh.clinica.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PacienteService implements IService<Paciente> {
 
     @Autowired
-    private PacienteRepository repository;
+    private IPacienteRepository repository;
 
     @Autowired
     DomicilioService domicilioService;

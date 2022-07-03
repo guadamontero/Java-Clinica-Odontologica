@@ -1,7 +1,7 @@
 package com.dh.clinica.service.impl;
 
 import com.dh.clinica.entities.Turno;
-import com.dh.clinica.repository.TurnoRepository;
+import com.dh.clinica.repository.ITurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class TurnoService {
 
     @Autowired
-    private TurnoRepository repository;
+    private ITurnoRepository repository;
 
     public ArrayList<Turno> mostrarTodos() {
         return new ArrayList<>(repository.findAll());

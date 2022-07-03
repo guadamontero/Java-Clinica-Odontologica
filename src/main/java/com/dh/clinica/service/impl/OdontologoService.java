@@ -2,7 +2,7 @@ package com.dh.clinica.service.impl;
 
 
 import com.dh.clinica.entities.Odontologo;
-import com.dh.clinica.repository.OdontologoRepository;
+import com.dh.clinica.repository.IOdontologoRepository;
 import com.dh.clinica.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class OdontologoService implements IService<Odontologo> {
 
     @Autowired
-    private OdontologoRepository repository;
+    private IOdontologoRepository repository;
 
 
     public Odontologo guardar(Odontologo odontologo){
