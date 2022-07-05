@@ -32,5 +32,4 @@ public class Paciente {
     @JsonIgnore
     private Set<Turno> turnos;
 
-
 }

@@ -31,6 +31,6 @@ public class TurnoController {
     @PostMapping
     public ResponseEntity<Object> guardarTurno(@RequestBody Turno turno){
         turnoService.guardar(turno);
-        return new ResponseEntity<>("Se creo un turno con id ", HttpStatus.OK);
+        return new ResponseEntity<>("Se creo un turno con id: " + turno.getId(), HttpStatus.OK);
     }
 }
