@@ -25,13 +25,4 @@ public class Odontologo {
     @JsonIgnore
     private Set<Turno> turnos;
 
-    public Odontologo() {
-    }
-
-    public Odontologo(String nombre, String apellido, String matricula, String telefono) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.matricula = matricula;
-        this.telefono = telefono;
-    }
 }

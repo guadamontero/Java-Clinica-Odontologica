@@ -3,6 +3,7 @@ package com.dh.clinica.controller;
 import com.dh.clinica.entities.Turno;
 import com.dh.clinica.service.impl.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,8 @@ public class TurnoController {
     }
 
     @PostMapping
-    public Turno guardarTurno(@RequestBody Turno turno){
-        return turnoService.guardar(turno);
+    public ResponseEntity<Object> guardarTurno(@RequestBody Turno turno){
+        turnoService.guardar(turno);
+        return new ResponseEntity<>("Se creo un turno con id ", HttpStatus.OK);
     }
 }
