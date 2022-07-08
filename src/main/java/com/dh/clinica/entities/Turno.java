@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "turnos")
@@ -15,7 +14,7 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private Date date;
+    private LocalDate fechaTurno;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="paciente_id", referencedColumnName = "id", nullable = false)

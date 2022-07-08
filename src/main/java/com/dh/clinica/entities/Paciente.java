@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Paciente {
     private String dni;
     private String sexo;
     private String telefono;
-    private Date fecha_ingreso = new Date();
+    private LocalDateTime fechaIngreso;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="domicilio_id", referencedColumnName = "id",nullable = false)

@@ -2,15 +2,15 @@ package com.dh.clinica.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+
+import java.util.Set;
 
 @Service
 public interface IService<T> {
-    T guardar(T t);
-    Optional<T> buscar (Long id);
-    List<T> buscarTodos();
-    boolean eliminar(Long id);
-    public T actualizar(T t);
+    T guardar(T t) throws Exception;
+    T buscar (Long id) throws Exception;
+    Set<T> buscarTodos() throws Exception;
+    String eliminar(Long id) throws Exception;
+    String actualizar(T t) throws Exception;
 
 }
