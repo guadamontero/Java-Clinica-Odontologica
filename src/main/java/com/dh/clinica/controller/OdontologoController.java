@@ -17,7 +17,7 @@ public class OdontologoController {
     OdontologoService odontologoService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<Odontologo> guardar(@RequestBody Odontologo odontologo) {
+    public ResponseEntity<Odontologo> guardar(@RequestBody Odontologo odontologo) throws BadRequestException{
         ResponseEntity<Odontologo> respuesta = ResponseEntity.badRequest().body(odontologo);
         Odontologo odontologoRegistrado = odontologoService.guardar(odontologo);
         if (odontologoRegistrado != null){

@@ -27,7 +27,7 @@ public class DomicilioService {
             return mapper.convertValue(guardado, Domicilio.class);
         }
         else {
-            throw new ResourceNotFoundException("El domicilio con id " + domicilio.getId() +" no fue encontrado en la base de datos");
+            throw new ResourceNotFoundException("El domicilio con id " + domicilio.getId() +" no fue encontrado");
         }
     }
 

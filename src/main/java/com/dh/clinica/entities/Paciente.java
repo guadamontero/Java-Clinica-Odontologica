@@ -23,7 +23,7 @@ public class Paciente {
     private String dni;
     private String sexo;
     private String telefono;
-    private LocalDateTime fechaIngreso;
+    private LocalDateTime fechaIngreso = LocalDateTime.now();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="domicilio_id", referencedColumnName = "id",nullable = false)

@@ -7,6 +7,7 @@ import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.repository.ITurnoRepository;
 import com.dh.clinica.service.IService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ import java.util.Set;
 
 @Service
 public class TurnoService implements IService<Turno> {
+
+    private final Logger logger = Logger.getLogger(TurnoService.class);
 
     @Autowired
     private ITurnoRepository turnoRepository;
@@ -50,11 +53,12 @@ public class TurnoService implements IService<Turno> {
                 respuesta = turnoRepository.save(turno);
                 respuesta.setPaciente(pacienteEncontrado);
                 respuesta.setOdontologo(odontologoEncontrado);
+                logger.info("Se ha registrado el turno con exito");
             } else {
-                throw new ResourceNotFoundException("El odontologo con id " + odontologoEncontrado.getId() + " ya tiene un turno agendado en la fecha "+ turno.getFechaTurno());
+                throw new ResourceNotFoundException("El odontologo con id " + odontologoEncontrado.getId() + " ya tiene un turno agendado en la siguiente fecha: " + turno.getFechaTurno());
             }
         } else {
-            throw new BadRequestException("Faltan introducir el id del paciente y del odontologo para crear el turno");
+            throw new BadRequestException("Faltan introducir el id del paciente y del odontologo para registrar un turno");
         }
         return respuesta;
     }
@@ -63,9 +67,10 @@ public class TurnoService implements IService<Turno> {
     public Turno buscar(Long id) throws ResourceNotFoundException {
         Turno turno = turnoRepository.findById(id).orElse(null);
         if (turno != null){
+            logger.info("Se consultó el turno del paciente " + turno.getPaciente().getApellido() + ", y odontologo " + turno.getOdontologo().getApellido());
             return turno;
         } else {
-            throw new ResourceNotFoundException ("No fue encontrado el odontologo con id " + id);
+            throw new ResourceNotFoundException ("No fue encontrado el turno con el siguiente id: " + id);
         }
     }
 
@@ -76,8 +81,9 @@ public class TurnoService implements IService<Turno> {
         for (Turno turno : listaTurnos){
             turnos.add(turno);
         }
+        logger.info("Se consultaron todos los turnos registrados en la base de datos");
         if (turnos.size() == 0){
-            throw new ResourceNotFoundException("No hay pacientes aún cargados en la base de datos");
+            throw new ResourceNotFoundException("No hay pacientes aún");
         }
         return turnos;
     }
@@ -89,7 +95,7 @@ public class TurnoService implements IService<Turno> {
             turnoRepository.deleteById(id);
             respuesta = "Eliminado exitosamente";
         } else {
-            throw new ResourceNotFoundException("No fue encontrado el turno en la base de datos");
+            throw new ResourceNotFoundException("El turno ingresado no existe");
         }
         return respuesta;
     }
@@ -101,13 +107,13 @@ public class TurnoService implements IService<Turno> {
             Optional<Turno> turnoActualizar = turnoRepository.findById(turno.getId());
             if (turnoActualizar.isPresent()){
                 turnoRepository.save(this.actualizarTurno(turnoActualizar.get(), turno));
-                respuesta = "Actualización con éxito del turno número: " + turno.getId();
+                respuesta = "Actualización exitosa del turno número: " + turno.getId();
             }
             else {
-                throw new ResourceNotFoundException("No fue posible encontrar el turno en la base de datos");
+                throw new ResourceNotFoundException("No fue posible encontrar el turno");
             }
         } else {
-            throw new BadRequestException("No se introdujo el id del turno a modificar");
+            throw new BadRequestException("Falta introducir el id del turno a modificar");
         }
         return respuesta;
     }

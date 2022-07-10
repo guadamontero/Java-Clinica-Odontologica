@@ -7,6 +7,7 @@ import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.repository.IOdontologoRepository;
 import com.dh.clinica.service.IService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +16,29 @@ import java.util.*;
 @Service
 public class OdontologoService implements IService<Odontologo> {
 
+    private final Logger logger = Logger.getLogger(OdontologoService.class);
+
     @Autowired
     private IOdontologoRepository odontologoRepository;
 
     @Autowired
     private ObjectMapper mapper;
 
-    public Odontologo guardar(Odontologo odontologo){
-        return odontologoRepository.save(odontologo);
+    public Odontologo guardar(Odontologo odontologo) throws BadRequestException{
+        if(odontologo != null){
+            odontologoRepository.save(odontologo);
+            logger.info("Se registró exitosamente al odontólogo: " + odontologo.getNombre() + " " + odontologo.getApellido());
+        } else {
+            throw new BadRequestException("Los datos ingresados son incorrectos");
+        }
+        return odontologo;
     }
 
     @Override
     public Odontologo buscar(Long id) throws ResourceNotFoundException{
         Odontologo odontologo = odontologoRepository.findById(id).orElse(null);
         if (odontologo != null){
+            logger.info("Se encontró al siguiente odontólogo: " + odontologo.getNombre() + " " + odontologo.getApellido());
             return odontologo;
         } else {
             throw new ResourceNotFoundException ("No fue encontrado el odontologo con id " + id);
@@ -42,8 +52,9 @@ public class OdontologoService implements IService<Odontologo> {
         for (Odontologo odontologo : listaOdontologos){
             odontologos.add(odontologo);
         }
+        logger.info("Se consultaron todos los odontólogos de la base de datos");
         if (odontologos.size() == 0){
-            throw new ResourceNotFoundException("No hay pacientes aún cargados en la base de datos");
+            throw new ResourceNotFoundException("No existen registros de odontólogos aún");
         }
         return odontologos;
     }
@@ -55,7 +66,7 @@ public class OdontologoService implements IService<Odontologo> {
             odontologoRepository.deleteById(id);
             respuesta = "Eliminado exitosamente";
         } else {
-            throw new ResourceNotFoundException("No se logró eliminar el odontologo de la base de datos. El id " + id +" no fue encontrado.");
+            throw new ResourceNotFoundException("No se pudo eliminar el odontologo de la base de datos. El id " + id +" no fue encontrado.");
         }
         return respuesta;
     }
@@ -66,9 +77,9 @@ public class OdontologoService implements IService<Odontologo> {
         Optional<Odontologo> odontologoActualizar = odontologoRepository.findById(odontologo.getId());
         if(odontologoActualizar.isPresent()){
             odontologoRepository.save(this.actualizarOdontologo(odontologoActualizar.get(), odontologo));
-            respuesta = "Actualización con éxito del odontólogo con id " + odontologo.getId();
+            respuesta = "Actualización exitosa del odontólogo con el siguiente id: " + odontologo.getId();
         }else {
-            throw new ResourceNotFoundException("No se logró actualizar el odontólogo. El odontólogo con id " + odontologo.getId() + " no fue encontrado en la base de datos");
+            throw new ResourceNotFoundException("No se pudo actualizar el odontólogo. El odontólogo con id " + odontologo.getId() + " no fue encontrado en la base de datos");
         }
         return respuesta;
     }

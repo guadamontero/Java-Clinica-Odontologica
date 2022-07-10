@@ -23,7 +23,7 @@ public class PacienteController {
 
 
     @PostMapping("/registrar")
-    public ResponseEntity<Paciente> guardar(@RequestBody Paciente paciente) {
+    public ResponseEntity<Paciente> guardar(@RequestBody Paciente paciente) throws BadRequestException {
         ResponseEntity<Paciente> respuesta = null;
         paciente.setFechaIngreso(LocalDateTime.now());
         Paciente pacienteRegistrado = pacienteService.guardar(paciente);
